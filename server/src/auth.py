@@ -33,6 +33,9 @@ async def handle_signin(request):
     mandatory_keys = ['id', 'nickname', 'password']
     if data_missing(mandatory_keys, body):
         return web.Response(text=bad_request_missing_data(mandatory_keys), status=400)
+    # TODO: check length of id, nickname, password.
+    # TODO: check if duplicate.
+    # TODO: encrypt password.
     new_user = {
         'id': body['id'],
         'nickname': body['nickname'],
@@ -69,6 +72,7 @@ async def handle_login(request):
 
 async def authenticated_ping(request):
     user_detail = request.get('user', None)
+    # TODO: change as a decorator. (@auth_required)
     if not user_detail:
         return web.Response(status=401)
     return web.Response(text='pong')
