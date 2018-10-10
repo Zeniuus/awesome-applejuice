@@ -2,6 +2,8 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import bulma from './main.scss'; /* eslint-disable-line */
+
 
 Vue.config.productionTip = false;
 

@@ -1,6 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/Home.vue';
+import Home from './views/Home';
+import RuralLife from './views/RuralLife';
+import AppleStory from './views/AppleStory';
+import QnA from './views/QnA';
+
 
 Vue.use(Router);
 
@@ -12,6 +16,21 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+    },
+    {
+      path: '/rural-life',
+      name: 'rural-life',
+      component: RuralLife,
+    },
+    {
+      path: '/apple-story',
+      name: 'apple-story',
+      component: AppleStory,
+    },
+    {
+      path: '/qna',
+      name: 'qna',
+      component: QnA,
     },
     // {
     //   path: '/about',
