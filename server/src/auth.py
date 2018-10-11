@@ -60,7 +60,7 @@ async def handle_login(request):
     row = result.first()
     if not row:
         return web.Response(status=401)
-    user_id, nickname, password = row
+    _, user_id, nickname, password = row
     jwt_byte = _jwt.encode({'id': user_id,
                             'nickname': nickname,
                             'password': password},
