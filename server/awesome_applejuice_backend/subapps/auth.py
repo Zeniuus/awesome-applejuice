@@ -3,8 +3,8 @@ import re
 import jwt as _jwt
 import sqlalchemy as sa
 
-from .models import user
-from .utils import data_missing, bad_request_missing_data
+from awesome_applejuice_backend.models import user
+from awesome_applejuice_backend.utils import data_missing, bad_request_missing_data
 
 
 @web.middleware

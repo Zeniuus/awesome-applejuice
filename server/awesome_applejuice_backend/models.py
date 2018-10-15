@@ -27,6 +27,26 @@ article = sa.Table(
     sa.Column('created_by', sa.Integer, sa.ForeignKey('user.row_id')),
 )
 
+
+class Article:
+    @staticmethod
+    def as_dict(articles):
+        if not articles:
+            return {}
+        if not isinstance(articles, list):
+            _article = articles
+            row_id, title, board, content, created_by = articles
+            return {
+                'title': title,
+                'board': board,
+                'content': content,
+                'created_by': created_by
+            }
+        if len(articles) == 0:
+            return {}
+        return list(map(Article.as_dict, articles))
+
+
 # TODO: add row_id, created_at, updated_at, deleted_at
 # columns automatically for every tables.
 # TODO: wrap models with API for CRUD operations.
