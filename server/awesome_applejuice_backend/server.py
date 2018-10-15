@@ -8,6 +8,10 @@ root_app_configs = [
 ]
 
 
+# TODO: flake8 test
+# TODO: travis-ci integration
+
+
 def init_root_app(app):
     # TODO: move configs to config file and .gitignore it.
     username = 'root'
@@ -23,6 +27,8 @@ def main():
     app = web.Application()
     init_root_app(app)
 
+    # TODO: subapps auto-detection
+    # TODO: maybe change name to "routes"?
     subapps = [
         'auth',
         'articles',
