@@ -28,7 +28,7 @@ def main():
     ]
 
     for subapp_name in subapps:
-        subapp_module = importlib.import_module(f'.{subapp_name}', 'src')
+        subapp_module = importlib.import_module(f'.{subapp_name}', 'awesome_applejuice_backend')
         subapp, subapp_middlewares = getattr(subapp_module, 'create_subapp', None)()
         app.add_subapp(f'/{subapp_name}', subapp)
         app.middlewares.extend(subapp_middlewares)
