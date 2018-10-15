@@ -23,6 +23,9 @@
           <router-link class="navbar-item" :to="{ name: 'qna' }">
             질문 및 응답
           </router-link>
+          <router-link class="navbar-item" :to="{ name: 'buy' }">
+            구매하기
+          </router-link>
         </div>
       </div>
     </div>

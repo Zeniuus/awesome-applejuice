@@ -4,6 +4,7 @@ import Home from './views/Home';
 import RuralLife from './views/RuralLife';
 import AppleStory from './views/AppleStory';
 import QnA from './views/QnA';
+import Buy from './views/Buy';
 
 
 Vue.use(Router);
@@ -31,6 +32,11 @@ export default new Router({
       path: '/qna',
       name: 'qna',
       component: QnA,
+    },
+    {
+      path: '/buy',
+      name: 'buy',
+      component: Buy,
     },
     // {
     //   path: '/about',

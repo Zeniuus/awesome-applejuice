@@ -1,6 +1,11 @@
 <template>
   <div class="advertisement card">
-    사과즙 절찬 판매중!
+    <p>
+      사과즙 절찬 판매중!
+    </p>
+    <p>
+      자세한 사항은 <router-link :to="{ name: 'buy' }">구매하기 페이지</router-link>를 참고해주세요.
+    </p>
   </div>
 </template>
 
