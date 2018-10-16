@@ -32,6 +32,7 @@ def main():
     subapps = [
         'auth',
         'articles',
+        'orders',
     ]
 
     for subapp_name in subapps:

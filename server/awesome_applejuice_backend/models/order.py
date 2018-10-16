@@ -26,3 +26,30 @@ order = sa.Table(
     sa.Column('status', sa.Enum(OrderStatus), default=OrderStatus.BEFORE_SEND),
     sa.Column('paid', sa.Boolean, default=False),
 )
+
+
+class OrderSerializer:
+    @staticmethod
+    def as_dict(orders):
+        if not orders:
+            return {}
+        if not isinstance(orders, list):
+            _order = orders
+            (
+                row_id, order_number, order_type,
+                sender_name, receiver_name, receiver_addr,
+                amount, status, paid
+            ) = _order
+            return {
+                'order_number': order_number,
+                'order_type': order_type,
+                'sender_name': sender_name,
+                'receiver_name': receiver_name,
+                'receiver_addr': receiver_addr,
+                'amount': amount,
+                'status': status,
+                'paid': paid,
+            }
+        if len(orders) == 0:
+            return {}
+        return list(map(OrderSerializer.as_dict, orders))
