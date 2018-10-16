@@ -1,7 +1,7 @@
 from aiohttp import web
 import sqlalchemy as sa
 
-from awesome_applejuice_backend.models import user, board, article, Article
+from awesome_applejuice_backend.models import article, Article
 from awesome_applejuice_backend.utils import data_missing, bad_request_missing_data
 
 

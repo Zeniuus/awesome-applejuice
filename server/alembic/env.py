@@ -18,8 +18,8 @@ fileConfig(config.config_file_name)
 from pathlib import Path
 import sys
 sys.path.append(str(Path().absolute()))
-from awesome_applejuice_backend import models
-target_metadata = models.metadata
+from awesome_applejuice_backend.models import metadata
+target_metadata = metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
