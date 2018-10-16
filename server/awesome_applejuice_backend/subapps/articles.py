@@ -1,7 +1,7 @@
 from aiohttp import web
 import sqlalchemy as sa
 
-from awesome_applejuice_backend.models import article, Article
+from awesome_applejuice_backend.models import article, ArticleSerializer
 from awesome_applejuice_backend.utils import data_missing, bad_request_missing_data
 
 
@@ -10,7 +10,7 @@ async def handle_articles_fetch(request):
                .select_from(article))
     result = request.app['db_engine'].execute(query)
     articles = list(result)
-    return web.json_response(Article.as_dict(articles))
+    return web.json_response(ArticleSerializer.as_dict(articles))
 
 
 async def handle_article_create(request):
@@ -44,8 +44,8 @@ async def handle_article_fetch(request):
                .select_from(article)
                .where(article.c.row_id == article_id))
     result = request.app['db_engine'].execute(query)
-    articles = result.first()
-    return web.json_response(Article.as_dict(articles))
+    _article = result.first()
+    return web.json_response(ArticleSerializer.as_dict(_article))
 
 
 async def handle_article_update(request):

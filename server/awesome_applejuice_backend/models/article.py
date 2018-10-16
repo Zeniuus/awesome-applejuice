@@ -13,14 +13,14 @@ article = sa.Table(
 )
 
 
-class Article:
+class ArticleSerializer:
     @staticmethod
     def as_dict(articles):
         if not articles:
             return {}
         if not isinstance(articles, list):
             _article = articles
-            row_id, title, board, content, created_by = articles
+            row_id, title, board, content, created_by = _article
             return {
                 'title': title,
                 'board': board,
@@ -29,4 +29,4 @@ class Article:
             }
         if len(articles) == 0:
             return {}
-        return list(map(Article.as_dict, articles))
+        return list(map(ArticleSerializer.as_dict, articles))
