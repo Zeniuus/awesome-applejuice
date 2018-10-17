@@ -1,7 +1,7 @@
 import enum
 import sqlalchemy as sa
 
-from .base import metadata
+from .base import metadata, SimpleSerializer
 
 
 class OrderType(enum.Enum):
@@ -28,28 +28,21 @@ order = sa.Table(
 )
 
 
-class OrderSerializer:
-    @staticmethod
-    def as_dict(orders):
-        if not orders:
-            return {}
-        if not isinstance(orders, list):
-            _order = orders
-            (
-                row_id, order_number, order_type,
-                sender_name, receiver_name, receiver_addr,
-                amount, status, paid
-            ) = _order
-            return {
-                'order_number': order_number,
-                'order_type': order_type,
-                'sender_name': sender_name,
-                'receiver_name': receiver_name,
-                'receiver_addr': receiver_addr,
-                'amount': amount,
-                'status': status,
-                'paid': paid,
-            }
-        if len(orders) == 0:
-            return {}
-        return list(map(OrderSerializer.as_dict, orders))
+class OrderSerializer(SimpleSerializer):
+    @classmethod
+    def single_item_as_dict(cls, _order):
+        (
+            row_id, order_number, order_type,
+            sender_name, receiver_name, receiver_addr,
+            amount, status, paid
+        ) = _order
+        return {
+            'order_number': order_number,
+            'order_type': order_type,
+            'sender_name': sender_name,
+            'receiver_name': receiver_name,
+            'receiver_addr': receiver_addr,
+            'amount': amount,
+            'status': status,
+            'paid': paid,
+        }

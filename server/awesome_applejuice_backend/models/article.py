@@ -1,6 +1,6 @@
 import sqlalchemy as sa
 
-from .base import metadata
+from .base import metadata, SimpleSerializer
 
 
 article = sa.Table(
@@ -13,20 +13,13 @@ article = sa.Table(
 )
 
 
-class ArticleSerializer:
-    @staticmethod
-    def as_dict(articles):
-        if not articles:
-            return {}
-        if not isinstance(articles, list):
-            _article = articles
-            row_id, title, board, content, created_by = _article
-            return {
-                'title': title,
-                'board': board,
-                'content': content,
-                'created_by': created_by
-            }
-        if len(articles) == 0:
-            return {}
-        return list(map(ArticleSerializer.as_dict, articles))
+class ArticleSerializer(SimpleSerializer):
+    @classmethod
+    def single_item_as_dict(cls, _article):
+        row_id, title, board, content, created_by = _article
+        return {
+            'title': title,
+            'board': board,
+            'content': content,
+            'created_by': created_by
+        }
