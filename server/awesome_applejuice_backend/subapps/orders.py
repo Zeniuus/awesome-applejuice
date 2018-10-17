@@ -2,10 +2,13 @@ from aiohttp import web
 import sqlalchemy as sa
 import uuid
 
-from awesome_applejuice_backend.models import order, OrderType, OrderSerializer
-from awesome_applejuice_backend.utils import data_missing, bad_request_missing_data
+from awesome_applejuice_backend.models import (
+    order, OrderType, OrderSerializer)
+from awesome_applejuice_backend.utils.http import (
+    data_missing, bad_request_missing_data, auth_required)
 
 
+@auth_required
 async def handle_orders_fetch(request):
     query = (sa.select('*')
                .select_from(order))

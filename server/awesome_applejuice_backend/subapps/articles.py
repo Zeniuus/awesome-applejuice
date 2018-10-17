@@ -2,7 +2,7 @@ from aiohttp import web
 import sqlalchemy as sa
 
 from awesome_applejuice_backend.models import article, ArticleSerializer
-from awesome_applejuice_backend.utils import data_missing, bad_request_missing_data
+from awesome_applejuice_backend.utils.http import data_missing, bad_request_missing_data
 
 
 async def handle_articles_fetch(request):

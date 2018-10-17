@@ -1,10 +1,10 @@
 from aiohttp import web
-import re
 import jwt as _jwt
+import re
 import sqlalchemy as sa
 
 from awesome_applejuice_backend.models import user
-from awesome_applejuice_backend.utils import data_missing, bad_request_missing_data
+from awesome_applejuice_backend.utils.http import data_missing, bad_request_missing_data
 
 
 @web.middleware
@@ -12,7 +12,7 @@ async def auth_middleware(request, handler):
     auth_header = request.headers.get('Authorization', None)
     if auth_header:
         user_detail = _parse_auth_header(auth_header)
-        if user:
+        if user_detail:
             request['user'] = user_detail
     return await handler(request)
 
