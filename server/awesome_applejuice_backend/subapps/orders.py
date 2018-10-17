@@ -23,6 +23,7 @@ async def handle_order_create(request):
     if data_missing(mandatory_keys, body):
         return web.Response(text=bad_request_missing_data(mandatory_keys),
                             status=400)
+    # TODO: validate inputs
     order_number = uuid.uuid4().hex
     new_order = {
         'order_number': order_number,
@@ -54,6 +55,7 @@ async def handle_order_fetch(request):
 
 async def handle_order_update(request):
     body = await request.json()
+    # TODO: validate inputs.
     order_number = request.match_info['order_number']
     order_update = {key: body[key]
                     for key in ['sender_name', 'amount', 'receiver_name', 'receiver_addr']

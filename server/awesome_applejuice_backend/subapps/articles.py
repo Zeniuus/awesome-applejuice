@@ -19,6 +19,7 @@ async def handle_article_create(request):
     if data_missing(mandatory_keys, body):
         return web.Response(text=bad_request_missing_data(mandatory_keys),
                             status=400)
+    # TODO: validate inputs.
     new_article = {
         'title': body['title'],
         'board': body['board'],
@@ -54,6 +55,7 @@ async def handle_article_update(request):
     except ValueError:
         return web.Response(text=f'Invalid article id: {article_id}',
                             status=400)
+    # TODO: validate inputs.
     body = await request.json()
     article_update = {key: body[key]
                       for key in ['title', 'board', 'content']
