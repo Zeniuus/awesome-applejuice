@@ -8,9 +8,9 @@
              type="text" v-model="senderName" />
     </horizontal-input-field>
     <horizontal-input-field>
-      <label slot="label" class="label" for="applejuice-number">주문 수량</label>
+      <label slot="label" class="label" for="amount">주문 수량</label>
       <div slot="input" class="select">
-        <select id="applejuice-number" v-model="applejuiceNum">
+        <select id="amount" v-model="amount">
           <option v-for="num in range(10)" :key="num">{{ num }}</option>
         </select>
       </div>
@@ -23,10 +23,13 @@
     <horizontal-input-field>
       <label slot="label" class="label" for="receiver-address">받으시는 분 주소</label>
       <input slot="input" id="receiver-address" class="input"
-             type="text" v-model="receiverAddress" />
+             type="text" v-model="receiverAddr" />
     </horizontal-input-field>
     <div class="container">
-      <button class="button is-primary">Submit</button>
+      <button class="button is-primary" :class="{ 'is-loading': this.isLoading }"
+              @click="createNewOrder">
+        Submit
+      </button>
     </div>
   </div>
 </template>
@@ -34,20 +37,43 @@
 <script>
 import { range } from '../utils/number'; /* eslint-disable-line */
 import HorizontalInputField from '../components/HorizontalInputField';
+import { API_URL } from '../config';
 
 export default {
   name: 'Buy',
   data() {
     return {
       senderName: '',
-      applejuiceNum: '',
+      amount: '',
       receiverName: '',
-      receiverAddress: '',
+      receiverAddr: '',
+      isLoading: false,
     };
   },
   methods: {
     range(n) {
       return range(n);
+    },
+    async createNewOrder() {
+      /* TODO: validate inputs. */
+      this.isLoading = true;
+      let result;
+      try {
+        const data = {
+          sender_name: this.senderName,
+          receiver_name: this.receiverName,
+          receiver_addr: this.receiverAddr,
+          amount: this.amount,
+        };
+        result = await this.$http.post(`${API_URL}/orders/`, data);
+      } catch (e) {
+        alert(e.toString()); /* eslint-disable-line */
+        this.isLoading = false;
+        return;
+      }
+      this.isLoading = false;
+      const orderNumber = result.data.order_number;
+      alert(`Your order number is:\n${orderNumber}`); /* eslint-disable-line */
     },
   },
   components: {
@@ -57,5 +83,4 @@ export default {
 </script>
 
 <style style="scss" scoped>
-
 </style>
