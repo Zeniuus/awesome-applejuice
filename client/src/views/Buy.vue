@@ -21,6 +21,11 @@
              type="text" v-model="receiverName" />
     </horizontal-input-field>
     <horizontal-input-field>
+      <label slot="label" class="label" for="receiver-phone">받으시는 분 전화번호</label>
+      <input slot="input" id="receiver-phone" class="input"
+             type="tel" v-model="receiverPhone" />
+    </horizontal-input-field>
+    <horizontal-input-field>
       <label slot="label" class="label" for="receiver-address">받으시는 분 주소</label>
       <input slot="input" id="receiver-address" class="input"
              type="text" v-model="receiverAddr" />
@@ -47,6 +52,7 @@ export default {
       amount: '',
       receiverName: '',
       receiverAddr: '',
+      receiverPhone: '',
       isLoading: false,
     };
   },
@@ -62,6 +68,7 @@ export default {
         const data = {
           sender_name: this.senderName,
           receiver_name: this.receiverName,
+          receiver_phone: this.receiverPhone,
           receiver_addr: this.receiverAddr,
           amount: this.amount,
         };

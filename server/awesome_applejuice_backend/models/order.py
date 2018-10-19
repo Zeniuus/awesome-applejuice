@@ -21,6 +21,7 @@ order = sa.Table(
     sa.Column('order_type', sa.Enum(OrderType)),
     sa.Column('sender_name', sa.Unicode(length=32)),
     sa.Column('receiver_name', sa.Unicode(length=32)),
+    sa.Column('receiver_phone', sa.String(length=16)),
     sa.Column('receiver_addr', sa.Unicode(length=512)),
     sa.Column('amount', sa.Integer),
     sa.Column('status', sa.Enum(OrderStatus), default=OrderStatus.BEFORE_SEND),
