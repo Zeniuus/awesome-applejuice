@@ -28,17 +28,32 @@
           </router-link>
         </div>
       </div>
+      <div class="navbar-end" v-show="isUserSignedIn">
+        <div class="navbar-item">
+          안녕하세요, {{ this.nickname }}님!
+        </div>
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'Navbar',
   data() {
     return {
       isMenuActive: false,
     };
+  },
+  computed: {
+    ...mapState([
+      'nickname',
+    ]),
+    isUserSignedIn() {
+      return !!this.nickname;
+    },
   },
   methods: {
     toggleBurgerMenu() {
