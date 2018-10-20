@@ -28,7 +28,7 @@ def _parse_auth_header(auth_header):
                        algorithm='HS256')
 
 
-async def handle_signin(request):
+async def handle_signup(request):
     body = await request.json()
     mandatory_keys = ['id', 'nickname', 'password']
     if data_missing(mandatory_keys, body):
@@ -47,7 +47,7 @@ async def handle_signin(request):
     return web.Response(status=204)
 
 
-async def handle_login(request):
+async def handle_signin(request):
     body = await request.json()
     mandatory_keys = ['id', 'password']
     if data_missing(mandatory_keys, body):
@@ -80,7 +80,7 @@ async def authenticated_ping(request):
 
 def create_subapp():
     app = web.Application()
-    app.add_routes([web.post('/login', handle_login),
+    app.add_routes([web.post('/signup', handle_signup),
                     web.post('/signin', handle_signin),
                     web.get('/ping', authenticated_ping)])
     return app, [auth_middleware]
