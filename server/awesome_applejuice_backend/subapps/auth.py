@@ -67,7 +67,9 @@ async def handle_signin(request):
                            'applejuice-backend-jwt-secret-key',
                            algorithm='HS256')
     jwt = jwt_byte.decode('utf-8')
-    return web.json_response({'jwt': jwt})
+    return web.json_response({'id': user_id,
+                              'nickname': nickname,
+                              'jwt': jwt})
 
 
 async def authenticated_ping(request):

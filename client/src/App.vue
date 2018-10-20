@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <navbar />
+    <navbar v-if="shouldNavbarShown" />
     <div class="container">
       <div class="columns">
-        <div class="column is-one-quarter">
+        <div class="column is-one-quarter" v-if="shouldAdShown">
           <advertisement />
         </div>
         <div class="column">
-          <router-view/>
+          <router-view />
         </div>
       </div>
     </div>
@@ -20,6 +20,27 @@ import Navbar from './components/Navbar';
 
 export default {
   name: 'app',
+  computed: {
+    shouldNavbarShown() {
+      const NAVBAR_VIEWS = [
+        'home',
+        'rural-life',
+        'apple-story',
+        'qna',
+        'order',
+      ];
+      return NAVBAR_VIEWS.includes(this.$route.name);
+    },
+    shouldAdShown() {
+      const AD_VIEWS = [
+        'home',
+        'rural-life',
+        'apple-story',
+        'qna',
+      ];
+      return AD_VIEWS.includes(this.$route.name);
+    },
+  },
   components: {
     Navbar,
     Advertisement,

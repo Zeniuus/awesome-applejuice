@@ -5,6 +5,7 @@ import RuralLife from './views/RuralLife';
 import AppleStory from './views/AppleStory';
 import QnA from './views/QnA';
 import Order from './views/Order';
+import Signin from './views/Signin';
 
 
 Vue.use(Router);
@@ -37,6 +38,11 @@ export default new Router({
       path: '/order',
       name: 'order',
       component: Order,
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: Signin,
     },
     // {
     //   path: '/about',
