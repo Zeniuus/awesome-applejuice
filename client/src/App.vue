@@ -41,6 +41,13 @@ export default {
       return AD_VIEWS.includes(this.$route.name);
     },
   },
+  beforeCreate() {
+    /*
+     * We cannot use mapMutations for initializeAuth mutation
+     * because vue instance is not initialized in beforeCreate hook.
+     */
+    this.$store.commit('initializeAuth');
+  },
   components: {
     Navbar,
     Advertisement,

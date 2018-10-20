@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
 
@@ -15,7 +16,17 @@ export default new Vuex.Store({
   mutations: {
     stateSetter(state, { field, value }) {
       assert(field);
-      state[field] = value; /* eslint-disable-line */
+      state[field] = value;
+    },
+    initializeAuth(state) {
+      const id = localStorage.getItem('id');
+      const nickname = localStorage.getItem('nickname');
+      const jwt = localStorage.getItem('jwt');
+      if (id && nickname && jwt) {
+        state.id = id;
+        state.nickname = nickname;
+        state.jwt = jwt;
+      }
     },
   },
   actions: {

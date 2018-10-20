@@ -53,10 +53,15 @@ export default {
         }
       }
 
-      /* Save user info in Vuex. */
-      ['id', 'nickname', 'jwt']
-        .map(field => ({ field, value: result.data[field] }))
-        .map(this.stateSetter);
+      /* Save user info in Vuex and localStorage. */
+      const keys = ['id', 'nickname', 'jwt'];
+      keys.map(field => ({
+        field,
+        value: result.data[field],
+      })).forEach(this.stateSetter);
+      keys.forEach((field) => {
+        localStorage.setItem(field, result.data[field]);
+      });
 
       this.$router.push({ name: 'home' });
     },
