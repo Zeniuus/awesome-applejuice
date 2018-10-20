@@ -48,7 +48,7 @@ import HorizontalInputField from '../components/HorizontalInputField';
 import { API_URL } from '../config';
 
 export default {
-  name: 'Buy',
+  name: 'Order',
   data() {
     return {
       senderName: '',
