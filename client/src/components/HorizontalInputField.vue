@@ -17,6 +17,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+.control {
+  width: 100%;
+}
 </style>

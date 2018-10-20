@@ -22,18 +22,21 @@
     </horizontal-input-field>
     <horizontal-input-field>
       <label slot="label" class="label" for="receiver-phone">받으시는 분 전화번호</label>
-      <input slot="input" id="receiver-phone" class="input"
-             type="tel" v-model="receiverPhone" />
+      <div slot="input" class="input-wrapper">
+        <input id="receiver-phone" class="input"
+               type="tel" v-model="receiverPhone" />
+        <span class="input-msg">대시 혹은 하이픈(-) 없이 작성해주세요!</span>
+      </div>
     </horizontal-input-field>
     <horizontal-input-field>
       <label slot="label" class="label" for="receiver-address">받으시는 분 주소</label>
       <input slot="input" id="receiver-address" class="input"
              type="text" v-model="receiverAddr" />
     </horizontal-input-field>
-    <div class="container">
+    <div class="buttons">
       <button class="button is-primary" :class="{ 'is-loading': this.isLoading }"
               @click="createNewOrder">
-        Submit
+        주문하기
       </button>
     </div>
   </div>
@@ -89,5 +92,31 @@ export default {
 };
 </script>
 
-<style style="scss" scoped>
+<style lang="scss" scoped>
+#sender-name, #receiver-name {
+  width: 6rem;
+}
+#receiver-phone {
+  width: 10rem;
+}
+.input-wrapper {
+  position: relative;
+  .input-msg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.9rem;
+    margin-left: 1rem;
+    font-weight: bold;
+    /*&::before {*/
+      /*content: '* ';*/
+    /*}*/
+  }
+}
+.buttons {
+  width: 100%;
+  .button {
+    margin: 0 auto;
+  }
+}
 </style>
