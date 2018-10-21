@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import HorizontalInputField from '../components/HorizontalInputField';
+import HorizontalInputField from '../components/common/HorizontalInputField';
 
 const constants = {
   Tab: {

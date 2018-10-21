@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import HorizontalInputField from '../HorizontalInputField';
+import HorizontalInputField from '../common/HorizontalInputField';
 import { API_URL } from '../../config';
 
 export default {

@@ -24,7 +24,7 @@
 <script>
 import { mapMutations } from 'vuex';
 
-import HorizontalInputField from '../components/HorizontalInputField';
+import HorizontalInputField from '../components/common/HorizontalInputField';
 import { API_URL } from '../config';
 
 export default {

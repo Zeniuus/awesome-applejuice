@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Advertisement from './components/Advertisement';
-import Navbar from './components/Navbar';
+import Advertisement from './components/common/Advertisement';
+import Navbar from './components/common/Navbar';
 
 export default {
   name: 'app',

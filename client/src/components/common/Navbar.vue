@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~bulma/bulma';
+@import '../../../node_modules/bulma/bulma';
 
 #navbar {
   padding: 1.25rem;

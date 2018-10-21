@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import HorizontalInputField from '../HorizontalInputField';
+import HorizontalInputField from '../common/HorizontalInputField';
 import { range } from '../../utils/number'; /* eslint-disable-line */
 import { API_URL } from '../../config';
 
