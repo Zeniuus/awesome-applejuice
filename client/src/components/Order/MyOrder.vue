@@ -12,35 +12,13 @@
         </div>
       </horizontal-input-field>
     </div>
-    <div class="order-detail" v-if="orders.length">
-      <table class="table is-fullwidth">
-        <thead>
-        <tr>
-          <!--<th>주문번호</th>-->
-          <th>주문인</th>
-          <th>주문 수량</th>
-          <th>수령인</th>
-          <th>수령인 전화번호</th>
-          <th>수령인 주소</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="order in orders">
-          <!--<th>{{ order.order_number }}</th>-->
-          <th>{{ order.sender_name }}</th>
-          <th>{{ order.amount }}</th>
-          <th>{{ order.receiver_name }}</th>
-          <th>{{ order.receiver_phone }}</th>
-          <th>{{ order.receiver_addr }}</th>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <order-table :orders="orders" />
   </div>
 </template>
 
 <script>
 import HorizontalInputField from '../common/HorizontalInputField';
+import OrderTable from '../common/OrderTable';
 import { API_URL } from '../../config';
 
 export default {
@@ -70,6 +48,7 @@ export default {
   },
   components: {
     HorizontalInputField,
+    OrderTable,
   },
 };
 </script>
