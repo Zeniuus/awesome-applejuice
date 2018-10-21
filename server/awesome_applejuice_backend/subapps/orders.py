@@ -51,6 +51,9 @@ async def handle_order_fetch(request):
                .where(order.c.order_number == order_number))
     result = request.app['db_engine'].execute(query)
     _order = result.first()
+    if not _order:
+        return web.Response(text=f'Requested order does not exist: {order_number}',
+                            status=400)
     return web.json_response(OrderSerializer.as_dict(_order))
 
 

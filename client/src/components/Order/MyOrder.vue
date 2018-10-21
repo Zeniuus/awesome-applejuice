@@ -39,7 +39,12 @@ export default {
       try {
         result = await this.$http.get(`${API_URL}/orders/${this.orderNumber}`);
       } catch (e) {
-        this.hasErrorOccurred = true;
+        const { status } = e.response;
+        if (status === 400 || status === 404) {
+          this.hasErrorOccurred = true;
+        } else {
+          alert(e.toString());
+        }
         this.orders = [];
         return;
       }
