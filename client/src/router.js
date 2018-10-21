@@ -6,6 +6,8 @@ import AppleStory from './views/AppleStory';
 import QnA from './views/QnA';
 import Order from './views/Order';
 import Signin from './views/Signin';
+import PurchaseForm from './components/Order/PurchaseForm';
+import MyOrder from './components/Order/MyOrder';
 
 
 Vue.use(Router);
@@ -38,6 +40,18 @@ const router = new Router({
       path: '/order',
       name: 'order',
       component: Order,
+      children: [
+        {
+          path: 'purchase',
+          name: 'order_purchase',
+          component: PurchaseForm,
+        },
+        {
+          path: 'my-order',
+          name: 'order_my-order',
+          component: MyOrder,
+        },
+      ],
     },
     {
       path: '/signin',

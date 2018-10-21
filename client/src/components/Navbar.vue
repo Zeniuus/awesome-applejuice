@@ -24,7 +24,7 @@
             질문 및 응답
           </router-link>
           <router-link class="navbar-item" :to="{ name: 'order' }">
-            구매하기
+            주문하기
           </router-link>
         </div>
       </div>
@@ -75,7 +75,7 @@ export default {
     font-weight: bold;
     color: #2c3e50;
 
-    &.router-link-exact-active {
+    &.router-link-active {
         color: #42b983;
     }
   }

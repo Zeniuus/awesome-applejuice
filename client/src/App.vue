@@ -22,14 +22,17 @@ export default {
   name: 'app',
   computed: {
     shouldNavbarShown() {
-      const NAVBAR_VIEWS = [
-        'home',
-        'rural-life',
-        'apple-story',
-        'qna',
-        'order',
+      // const NAVBAR_VIEWS = [
+      //   'home',
+      //   'rural-life',
+      //   'apple-story',
+      //   'qna',
+      //   'order',
+      // ];
+      const NO_NAVBAR_VIEWS = [
+        'signin',
       ];
-      return NAVBAR_VIEWS.includes(this.$route.name);
+      return !NO_NAVBAR_VIEWS.includes(this.$route.name);
     },
     shouldAdShown() {
       const AD_VIEWS = [
