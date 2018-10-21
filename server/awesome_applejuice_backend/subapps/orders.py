@@ -19,7 +19,7 @@ async def handle_orders_fetch(request):
 
 async def handle_order_create(request):
     body = await request.json()
-    mandatory_keys = ['sender_name', 'amount', 'receiver_name', 'receiver_addr']
+    mandatory_keys = ['sender_name', 'amount', 'receiver_name', 'receiver_phone', 'receiver_addr']
     if data_missing(mandatory_keys, body):
         return web.Response(text=bad_request_missing_data(mandatory_keys),
                             status=400)
@@ -31,6 +31,7 @@ async def handle_order_create(request):
         'sender_name': body['sender_name'],
         'amount': body['amount'],
         'receiver_name': body['receiver_name'],
+        'receiver_phone': body['receiver_phone'],
         'receiver_addr': body['receiver_addr'],
     }
     query = (order.insert()
@@ -58,7 +59,7 @@ async def handle_order_update(request):
     # TODO: validate inputs.
     order_number = request.match_info['order_number']
     order_update = {key: body[key]
-                    for key in ['sender_name', 'amount', 'receiver_name', 'receiver_addr']
+                    for key in ['sender_name', 'amount', 'receiver_name', 'receiver_phone', 'receiver_addr']
                     if key in body.keys()}
     query = (order.update()
                   .values(**order_update)

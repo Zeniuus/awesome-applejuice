@@ -34,7 +34,7 @@ class OrderSerializer(SimpleSerializer):
     def single_item_as_dict(cls, _order):
         (
             row_id, order_number, order_type,
-            sender_name, receiver_name, receiver_addr,
+            sender_name, receiver_name, receiver_phone, receiver_addr,
             amount, status, paid
         ) = _order
         return {
@@ -42,6 +42,7 @@ class OrderSerializer(SimpleSerializer):
             'order_type': order_type,
             'sender_name': sender_name,
             'receiver_name': receiver_name,
+            'receiver_phone': receiver_phone,
             'receiver_addr': receiver_addr,
             'amount': amount,
             'status': status,

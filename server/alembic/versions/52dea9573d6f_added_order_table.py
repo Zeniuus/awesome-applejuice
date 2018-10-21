@@ -25,7 +25,7 @@ def upgrade():
         sa.Column('order_type', sa.Enum('APPLEJUICE', name='ordertype'), nullable=True),
         sa.Column('sender_name', sa.Unicode(length=32), nullable=True),
         sa.Column('receiver_name', sa.Unicode(length=32), nullable=True),
-        sa.Column('order_number', sa.String(length=16), nullable=True),
+        sa.Column('receiver_phone', sa.String(length=16), nullable=True),
         sa.Column('receiver_addr', sa.Unicode(length=512), nullable=True),
         sa.Column('amount', sa.Integer(), nullable=True),
         sa.Column('status', sa.Enum('BEFORE_SEND', 'ON_DELIVERY', 'DELIVERY_COMPLETE', name='orderstatus'), nullable=True),
