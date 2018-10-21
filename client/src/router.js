@@ -6,7 +6,7 @@ import AppleStory from './views/AppleStory';
 import QnA from './views/QnA';
 import Order from './views/Order';
 import Signin from './views/Signin';
-import PurchaseForm from './components/Order/PurchaseForm';
+import OrderForm from './components/Order/OrderForm';
 import MyOrder from './components/Order/MyOrder';
 
 
@@ -44,7 +44,7 @@ const router = new Router({
         {
           path: 'purchase',
           name: 'order_purchase',
-          component: PurchaseForm,
+          component: OrderForm,
         },
         {
           path: 'my-order',
