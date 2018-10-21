@@ -81,7 +81,7 @@ export default {
       }
       this.isLoading = false;
       const orderNumber = result.data.order_number;
-      alert(`Your order number is:\n${orderNumber}`); /* eslint-disable-line */
+      this.$router.push({ name: 'order_complete', params: { orderNumber } });
     },
   },
   components: {

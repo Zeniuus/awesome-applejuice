@@ -2,7 +2,7 @@
   <div>
     <div id="order-tabs" class="tabs is-centered is-medium">
       <ul>
-        <li :class="{ 'is-active': tab === Tab.PURCHASE }">
+        <li :class="{ 'is-active': [Tab.PURCHASE, Tab.COMPLETE].includes(tab) }">
           <router-link :to="{ name: 'order_purchase' }">주문하기</router-link>
         </li>
         <li :class="{ 'is-active': tab === Tab.MY_ORDER }">
@@ -21,6 +21,7 @@ const constants = {
   Tab: {
     PURCHASE: 'PURCHASE',
     MY_ORDER: 'MY_ORDER',
+    COMPLETE: 'COMPLETE',
   },
 };
 

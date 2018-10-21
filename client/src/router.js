@@ -7,6 +7,7 @@ import QnA from './views/QnA';
 import Order from './views/Order';
 import Signin from './views/Signin';
 import OrderForm from './components/Order/OrderForm';
+import OrderComplete from './components/Order/OrderComplete';
 import MyOrder from './components/Order/MyOrder';
 
 
@@ -50,6 +51,12 @@ const router = new Router({
           path: 'my-order',
           name: 'order_my-order',
           component: MyOrder,
+        },
+        {
+          path: 'complete',
+          name: 'order_complete',
+          component: OrderComplete,
+          props: true,
         },
       ],
     },
