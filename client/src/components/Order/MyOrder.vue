@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h4 class="subtitle">주문하셨을 때 받으신 주문번호를 입력해주세요.</h4>
+    <h6 class="subtitle is-6">주문하셨을 때 받으신 주문번호를 입력해주세요.</h6>
     <div class="form-wrapper">
       <horizontal-input-field width="20rem">
         <label slot="label" class="label" for="order-number">주문번호</label>

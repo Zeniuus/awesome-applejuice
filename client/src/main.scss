@@ -1,1 +1,23 @@
 @import '~bulma/bulma';
+
+/* Global input styling */
+.input, select.input-select {
+  border-top: 0;
+  border-left: 0;
+  border-right: 0;
+  border-bottom: 1px #dbdbdb solid;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  height: 1.75rem;
+
+  &:focus {
+    box-shadow: none;
+    border-bottom-width: 2px;
+    padding-bottom: -1px;
+  }
+}
+
+.select:not(.is-multiple):not(.is-loading)::after {
+  right: 0.5rem;
+}

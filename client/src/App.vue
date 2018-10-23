@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar v-if="shouldNavbarShown" />
-    <div class="container">
+    <div id="page-root" class="container">
       <div class="columns">
         <div class="column is-one-fifth-widescreen is-one-quarter is-desktop"
              v-if="shouldAdShown">
@@ -69,7 +69,7 @@ export default {
   text-align: center;
   color: #2c3e50;
 
-  .container {
+  #page-root {
     padding-top: $navbar-height + 2rem;
   }
 }
