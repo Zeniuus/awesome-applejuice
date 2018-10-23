@@ -3,7 +3,8 @@
     <navbar v-if="shouldNavbarShown" />
     <div class="container">
       <div class="columns">
-        <div class="column is-one-quarter" v-if="shouldAdShown">
+        <div class="column is-one-fifth-widescreen is-one-quarter is-desktop"
+             v-if="shouldAdShown">
           <advertisement />
         </div>
         <div class="column">
@@ -59,11 +60,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './main';
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
+  .container {
+    padding-top: $navbar-height + 2rem;
+  }
 }
 </style>

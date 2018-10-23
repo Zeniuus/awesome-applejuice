@@ -27,10 +27,10 @@
             주문하기
           </router-link>
         </div>
-      </div>
-      <div class="navbar-end" v-show="isUserSignedIn">
-        <div class="navbar-item">
-          안녕하세요, {{ this.nickname }}님!
+        <div class="navbar-end" v-show="isUserSignedIn">
+          <div class="navbar-item">
+            안녕하세요, {{ this.nickname }}님!
+          </div>
         </div>
       </div>
     </div>
@@ -64,12 +64,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../node_modules/bulma/bulma';
+@import '../../main';
 
 #navbar {
-  padding: 1.25rem;
+  position: fixed;
+  width: 100%;
+  height: $navbar-height;
+  padding: 0 1.25rem;
   border-bottom-color: $navbar-box-shadow-color;
   border-width: $navbar-box-shadow-size;
+  box-shadow: 2px 2px 4px 0 #cccccc;
 
   a {
     font-weight: bold;
