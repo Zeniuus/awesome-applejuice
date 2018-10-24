@@ -1,6 +1,7 @@
 from aiohttp import web
 import importlib
 import sqlalchemy as sa
+import aiohttp_cors
 
 
 root_app_configs = [
@@ -42,6 +43,16 @@ def main():
         app.middlewares.extend(subapp_middlewares)
         for config in root_app_configs:
             subapp[config] = app[config]
+
+    cors = aiohttp_cors.setup(app, defaults={
+        '*': aiohttp_cors.ResourceOptions(
+                allow_credentials=True,
+                expose_headers='*',
+                allow_headers='*',
+            )
+    })
+    for route in list(app.router.routes()):
+        cors.add(route)
 
     web.run_app(app)
 
