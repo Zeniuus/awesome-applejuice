@@ -6,7 +6,8 @@
       <input-field>
         <label slot="label" class="label" for="sender-name">보내시는 분 성함</label>
         <input slot="input" id="sender-name" class="input" ref="senderName"
-               type="text" v-model="senderName" />
+               type="text" v-model="senderName"
+               @keypress.enter="createNewOrder"/>
       </input-field>
       <input-field>
         <label slot="label" class="label" for="amount">주문 수량</label>
@@ -19,20 +20,23 @@
       <input-field>
         <label slot="label" class="label" for="receiver-name">받으시는 분 성함</label>
         <input slot="input" id="receiver-name" class="input" ref="receiverName"
-               type="text" v-model="receiverName" />
+               type="text" v-model="receiverName"
+               @keypress.enter="createNewOrder" />
       </input-field>
       <input-field>
         <label slot="label" class="label" for="receiver-phone">받으시는 분 전화번호</label>
         <div slot="input" class="input-wrapper">
           <input id="receiver-phone" class="input" ref="receiverPhone"
-                 type="tel" v-model="receiverPhone" />
+                 type="tel" v-model="receiverPhone"
+                 @keypress.enter="createNewOrder" />
           <span class="input-msg">대시 혹은 하이픈(-) 없이 작성해주세요!</span>
         </div>
       </input-field>
       <input-field>
         <label slot="label" class="label" for="receiver-address">받으시는 분 주소</label>
         <input slot="input" id="receiver-address" class="input" ref="receiverAddr"
-               type="text" v-model="receiverAddr" />
+               type="text" v-model="receiverAddr"
+               @keypress.enter="createNewOrder" />
       </input-field>
     </div>
     <div class="buttons">
