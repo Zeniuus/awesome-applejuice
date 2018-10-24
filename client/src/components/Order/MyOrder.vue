@@ -8,6 +8,7 @@
           <input slot="input" id="order-number" class="input"
                  type="text" v-model="orderNumber"
                  @input="hideError" @keypress.enter="fetchMyOrder" />
+          <p class="input-msg error" :class="{ 'is-active': isEmptyOrderNumber }">주문번호를 입력해주세요!</p>
           <p class="input-msg error" :class="{ 'is-active': hasErrorOccurred }">해당하는 주문이 없습니다.</p>
         </div>
       </horizontal-input-field>
@@ -26,15 +27,22 @@ export default {
   data() {
     return {
       orderNumber: '',
+      isEmptyOrderNumber: false,
       hasErrorOccurred: false,
       orders: [],
     };
   },
   methods: {
     hideError() {
+      this.isEmptyOrderNumber = false;
       this.hasErrorOccurred = false;
     },
     async fetchMyOrder() {
+      if (/^\s*$/.test(this.orderNumber)) {
+        this.isEmptyOrderNumber = true;
+        return;
+      }
+
       let result;
       try {
         result = await this.$http.get(`${API_URL}/orders/${this.orderNumber}`);
