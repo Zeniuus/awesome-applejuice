@@ -76,8 +76,11 @@ export default {
   }
 
   .input-wrapper {
+    position: relative;
+
     .input-msg {
       display: none;
+      position: absolute;
       font-size: 0.9rem;
       margin-top: 0.25rem;
 
