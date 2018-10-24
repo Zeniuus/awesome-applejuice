@@ -61,7 +61,7 @@ async def handle_order_fetch(request):
     _order = result.first()
     if not _order:
         return web.Response(text=f'Requested order does not exist: {order_number}',
-                            status=400)
+                            status=404)
     return web.json_response(OrderSerializer.as_dict(_order))
 
 
@@ -78,7 +78,7 @@ async def handle_order_update(request):
     result = request.app['db_engine'].execute(query)
     if not result.rowcount:
         return web.Response(text=f'Requested order does not exist: {order_number}',
-                            status=400)
+                            status=404)
     return web.json_response(None, status=204)
 
 
@@ -89,7 +89,7 @@ async def handle_order_delete(request):
     result = request.app['db_engine'].execute(query)
     if not result.rowcount:
         return web.Response(text=f'Requested order does not exist: {order_number}',
-                            status=400)
+                            status=404)
     return web.json_response(None, status=204)
 
 
@@ -97,7 +97,7 @@ def create_subapp():
     app = web.Application()
     app.add_routes([web.get('/', handle_orders_fetch),
                     web.post('/', handle_order_create),
-                    web.get(r'/{order_number:[0-9a-f]+}', handle_order_fetch),
-                    web.put(r'/{order_number:[0-9a-f]+}', handle_order_update),
-                    web.delete(r'/{order_number:[0-9a-f]+}', handle_order_delete)])
+                    web.get(r'/{order_number:.+}', handle_order_fetch),
+                    web.put(r'/{order_number:.+}', handle_order_update),
+                    web.delete(r'/{order_number:.+}', handle_order_delete)])
     return app, []
