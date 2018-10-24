@@ -68,8 +68,8 @@ function validationFailMsg({ type, input }) {
 
 function validateForm(requiredValidationTypes) {
   const validate = {
-    notEmpty: input => !!this[input],
-    number: input => /\d+/.test(this[input]),
+    notEmpty: input => !/^\s*$/.test(this[input]),
+    number: input => /^\d+$/.test(this[input]),
   };
 
   return Object.keys(requiredValidationTypes).every((input) => {
