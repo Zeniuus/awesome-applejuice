@@ -8,8 +8,7 @@
           <input slot="input" id="order-number" class="input"
                  type="text" v-model="orderNumber"
                  @input="hideError" @keypress.enter="fetchMyOrder" />
-          <p class="input-msg error" :class="{ 'is-active': isEmptyOrderNumber }">주문번호를 입력해주세요!</p>
-          <p class="input-msg error" :class="{ 'is-active': hasErrorOccurred }">해당하는 주문이 없습니다.</p>
+          <p class="input-msg error" :class="{ 'is-active': errorMsg }">{{ errorMsg }}</p>
         </div>
       </horizontal-input-field>
     </div>
@@ -27,19 +26,21 @@ export default {
   data() {
     return {
       orderNumber: '',
-      isEmptyOrderNumber: false,
-      hasErrorOccurred: false,
+      errorMsg: '',
       orders: [],
     };
   },
   methods: {
+    displayError(errorMsg) {
+      this.errorMsg = errorMsg;
+      this.orders = [];
+    },
     hideError() {
-      this.isEmptyOrderNumber = false;
-      this.hasErrorOccurred = false;
+      this.errorMsg = '';
     },
     async fetchMyOrder() {
       if (/^\s*$/.test(this.orderNumber)) {
-        this.isEmptyOrderNumber = true;
+        this.displayError('주문번호를 입력해주세요!');
         return;
       }
 
@@ -47,13 +48,16 @@ export default {
       try {
         result = await this.$http.get(`${API_URL}/orders/${this.orderNumber}`);
       } catch (e) {
-        const { status } = e.response;
-        if (status === 400 || status === 404) {
-          this.hasErrorOccurred = true;
-        } else {
-          alert(e.toString());
+        if (!e.response) {
+          this.displayError('알 수 없는 이유로 주문 조회에 실패했습니다.');
+          return;
         }
-        this.orders = [];
+        const { status } = e.response;
+        if (status === 404) {
+          this.displayError('해당하는 주문이 없습니다.');
+        } else {
+          this.displayError('알 수 없는 이유로 주문 조회에 실패했습니다.');
+        }
         return;
       }
       this.orders = [result.data];
