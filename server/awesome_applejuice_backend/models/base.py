@@ -1,5 +1,5 @@
 import sqlalchemy as sa
-from abc import abstractmethod
+from abc import abstractmethod, ABC
 
 
 metadata = sa.MetaData()
@@ -9,7 +9,7 @@ metadata = sa.MetaData()
 # TODO: wrap models with API for CRUD operations.
 
 
-class SimpleSerializer:
+class SimpleSerializer(ABC):
     @classmethod
     def as_dict(cls, items):
         if not isinstance(items, list):
