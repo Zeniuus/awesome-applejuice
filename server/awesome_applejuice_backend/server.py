@@ -17,10 +17,9 @@ def init_root_app(app):
     # TODO: move configs to config file and .gitignore it.
     username = 'root'
     password = '04220506'
-    host = 'localhost:3306'
+    host = 'backend-db'
     dbname = 'awesome-applejuice-db'
     app['db_engine'] = sa.create_engine(f'mysql+pymysql://{username}:{password}@{host}/{dbname}')
-    # TODO: use docker-compose to setup MySQL DB container.
 
 
 def main():
@@ -59,5 +58,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# TODO: dockerize application.

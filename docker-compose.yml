@@ -1,0 +1,48 @@
+version: '3'
+services:
+#  frontend:
+#    build: ./client
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - backend
+#    depends_on:
+#      - backend
+  backend:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile/server
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    links:
+      - "mysql:backend-db"
+    depends_on:
+      - "mysql"
+  mysql:
+    image: "mysql:latest"
+#    ports:
+#      - "3306:3306"
+    volumes:
+      - /data/db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=04220506
+      - MYSQL_DATABASE=awesome-applejuice-db
+    networks:
+      - backend
+  migration:
+    build:
+      context: ./server
+      dockerfile: ./Dockerfile/migration
+    networks:
+      - backend
+    links:
+      - "mysql:backend-db"
+    depends_on:
+      - "mysql"
+# TODO: Wait until mysql container is "ready", not "started".
+# TODO: refs: https://docs.docker.com/compose/startup-order/
+networks:
+  backend:
+

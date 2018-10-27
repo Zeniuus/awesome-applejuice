@@ -1,0 +1,11 @@
+FROM python:3.6-alpine
+
+COPY . /migration
+WORKDIR /migration
+
+RUN apk add --no-cache --virtual .pynacl_deps build-base python3-dev openssl-dev libffi-dev
+
+RUN pip install -U -q pip setuptools && \
+    pip install -r requirements-migration.txt
+
+CMD ["alembic", "upgrade", "head"]
