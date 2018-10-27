@@ -1,13 +1,13 @@
 version: '3'
 services:
-#  frontend:
-#    build: ./client
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - backend
-#    depends_on:
-#      - backend
+  frontend:
+    build: ./client
+    ports:
+      - "8081:8081"
+    networks:
+      - backend
+    depends_on:
+      - backend
   backend:
     build:
       context: ./server
