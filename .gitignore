@@ -9,3 +9,19 @@ __pycache__/
 
 # pytest
 .pytest_cache/
+htmlcov/
+.coverage
+
+# logs
+*.log
+
+# package deployment
+*.egg-info/
+dist/
+build/
+
+# config files
+alembic.ini
+
+# virtualenvs
+.python-version
