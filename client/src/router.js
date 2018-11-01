@@ -12,8 +12,26 @@ import Manage from './views/Manage';
 import Signin from './views/Signin';
 import NotFound from './views/NotFound';
 
+import store from './store';
+
 
 Vue.use(Router);
+
+function adminGuard(to, from, next) {
+  if (!store.state.authInitialized) {
+    store.commit('initializeAuth');
+  }
+
+  if (store.state.jwt) {
+    next();
+  } else {
+    /*
+     * Navigate to NotFound component, without updating URL.
+     * refs: https://github.com/vuejs/vue-router/issues/977#issuecomment-304498068
+     */
+    next({ name: 'not-found', params: [to.path] });
+  }
+}
 
 const router = new Router({
   mode: 'history',
@@ -66,7 +84,7 @@ const router = new Router({
       path: '/manage',
       name: 'manage',
       component: Manage,
-      // beforeEnter: adminGuard,
+      beforeEnter: adminGuard,
     },
     {
       path: '/signin',

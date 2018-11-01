@@ -51,7 +51,9 @@ export default {
      * We cannot use mapMutations for initializeAuth mutation
      * because vue instance is not initialized in beforeCreate hook.
      */
-    this.$store.commit('initializeAuth');
+    if (!this.$store.state.authInitialized) {
+      this.$store.commit('initializeAuth');
+    }
   },
   components: {
     Navbar,

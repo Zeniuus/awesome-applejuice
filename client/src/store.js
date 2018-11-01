@@ -12,6 +12,7 @@ export default new Vuex.Store({
     id: null,
     nickname: null,
     jwt: null,
+    authInitialized: false,
   },
   mutations: {
     stateSetter(state, { field, value }) {
@@ -19,6 +20,8 @@ export default new Vuex.Store({
       state[field] = value;
     },
     initializeAuth(state) {
+      state.authInitialized = true;
+
       const id = localStorage.getItem('id');
       const nickname = localStorage.getItem('nickname');
       const jwt = localStorage.getItem('jwt');
