@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <navbar v-if="shouldNavbarShown" />
-    <div id="page-root" class="container">
+    <div id="page-root" class="container" :class="{ 'navbar-hidden': !shouldNavbarShown }">
       <div class="columns">
         <div class="column is-one-fifth-widescreen is-one-quarter is-desktop"
              v-if="shouldAdShown">
@@ -71,6 +71,10 @@ export default {
 
   #page-root {
     padding-top: $navbar-height + 2rem;
+
+    &.navbar-hidden {
+      padding-top: 0;
+    }
   }
 }
 </style>
