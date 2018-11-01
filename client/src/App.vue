@@ -32,6 +32,7 @@ export default {
       // ];
       const NO_NAVBAR_VIEWS = [
         'signin',
+        'not-found',
       ];
       return !NO_NAVBAR_VIEWS.includes(this.$route.name);
     },
