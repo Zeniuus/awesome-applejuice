@@ -8,6 +8,7 @@ import Order from './views/Order';
 import OrderForm from './components/Order/OrderForm';
 import OrderComplete from './components/Order/OrderComplete';
 import MyOrder from './components/Order/MyOrder';
+import Manage from './views/Manage';
 import Signin from './views/Signin';
 import NotFound from './views/NotFound';
 
@@ -60,6 +61,12 @@ const router = new Router({
           props: true,
         },
       ],
+    },
+    {
+      path: '/manage',
+      name: 'manage',
+      component: Manage,
+      // beforeEnter: adminGuard,
     },
     {
       path: '/signin',

@@ -26,6 +26,9 @@
           <router-link class="navbar-item" :to="{ name: 'order' }">
             주문하기
           </router-link>
+          <router-link v-if="nickname" class="navbar-item" :to="{ name: 'manage' }">
+            주문 관리
+          </router-link>
         </div>
         <div class="navbar-end" v-show="isUserSignedIn">
           <div class="navbar-item">

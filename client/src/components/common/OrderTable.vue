@@ -3,7 +3,7 @@
     <table class="table is-fullwidth">
       <thead>
         <tr>
-          <th v-if="isAdmin">주문번호</th>
+          <th v-if="isAdmin" class="order-number">주문번호</th>
           <th class="sender-name">주문인</th>
           <th class="amount">주문 수량</th>
           <th class="receiver-name">수령인</th>
@@ -12,7 +12,8 @@
         </tr>
       </thead>
       <tbody>
-        <order-table-row v-for="order in orders" :order="order" :key="order.order_number" />
+        <order-table-row v-for="order in orders" :order="order" :is-admin="isAdmin"
+                         :key="order.order_number" />
       </tbody>
     </table>
   </div>
@@ -34,6 +35,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.order-number {
+  width: 20rem;
+}
+
 .sender-name {
   width: 5rem;
 }
@@ -48,5 +53,9 @@ export default {
 
 .receiver-phone {
   width: 10rem;
+}
+
+.receiver-addr {
+  width: 20rem;
 }
 </style>
