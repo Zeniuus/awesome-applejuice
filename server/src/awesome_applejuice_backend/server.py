@@ -1,4 +1,5 @@
 from aiohttp import web
+from dynaconf import settings
 import importlib
 import sqlalchemy as sa
 import aiohttp_cors
@@ -14,11 +15,10 @@ root_app_configs = [
 
 
 def init_root_app(app):
-    # TODO: move configs to config file and .gitignore it.
-    username = 'root'
-    password = '04220506'
-    host = 'backend-db'
-    dbname = 'awesome-applejuice-db'
+    username = settings.USERNAME
+    password = settings.PASSWORD
+    host = settings.HOST
+    dbname = settings.DBNAME
     app['db_engine'] = sa.create_engine(f'mysql+pymysql://{username}:{password}@{host}/{dbname}')
 
 
