@@ -4,32 +4,48 @@ import alembic.config
 import asyncio
 from dynaconf import settings
 import importlib
+import jwt as _jwt
 import pytest
 import sqlalchemy as sa
 import time
 
+from awesome_applejuice_backend.models import user
 from awesome_applejuice_backend.server import init_root_app
 
 
-def wait_db_ready():
+def get_db_engine():
     username = settings.USERNAME
     password = settings.PASSWORD
     host = settings.HOST
     dbname = settings.DBNAME
     db_engine = sa.create_engine(f'mysql+pymysql://{username}:{password}@{host}/{dbname}')
+    return db_engine
+
+
+def wait_db_ready():
+    db_engine = get_db_engine()
     print('Waiting for DB ready...')
     while True:
         try:
             db_engine.execute('SHOW DATABASES;')
-        except sa.exc.OperationalError as e:
+        except sa.exc.OperationalError:
             time.sleep(3)
         else:
             print('DB is ready now.')
             break
 
 
+@pytest.fixture(scope='session')
+def test_user():
+    return {
+        'id': 'default-test-id',
+        'nickname': 'default-test-nickname',
+        'password': 'default-test-password'
+    }
+
+
 @pytest.fixture(scope='session', autouse=True)
-def create_database():
+def create_database(test_user):
     docker = aiodocker.Docker()
     container = None
 
@@ -65,8 +81,14 @@ def create_database():
 
     wait_db_ready()
 
+    # Perform migration.
     alembic_migration_cmd = ['upgrade', 'head']
     alembic.config.main(argv=alembic_migration_cmd)
+
+    # Insert default values for testing.
+    db_engine = get_db_engine()
+    query = (user.insert().values(test_user))
+    db_engine.execute(query)
 
     yield
 
@@ -111,3 +133,12 @@ async def prepare_app():
     yield app
 
     await runner.cleanup()
+
+
+@pytest.fixture
+def auth_header(test_user):
+    jwt_byte = _jwt.encode(test_user,
+                           'applejuice-backend-jwt-secret-key',
+                           algorithm='HS256')
+    jwt = jwt_byte.decode('utf-8')
+    return {'Authorization': f'Bearer {jwt}'}
