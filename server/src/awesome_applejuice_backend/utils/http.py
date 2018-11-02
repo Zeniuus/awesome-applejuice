@@ -18,7 +18,11 @@ def validate_body(body, required_validations):
         if validation == 'not_empty':
             return not not input
         elif validation == 'number':
-            return input.isdigit()
+            if isinstance(input, int):
+                return True
+            elif isinstance(input, str):
+                return input.isdigit()
+            return False
         else:
             raise ValueError(f'Not implemented type of validation: {validation}')
 
