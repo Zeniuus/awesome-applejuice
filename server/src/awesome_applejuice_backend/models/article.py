@@ -18,6 +18,7 @@ class ArticleSerializer(SimpleSerializer):
     def single_item_as_dict(cls, _article):
         row_id, title, board, content, created_by = _article
         return {
+            'id': row_id,
             'title': title,
             'board': board,
             'content': content,
