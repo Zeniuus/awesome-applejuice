@@ -46,7 +46,7 @@ async def handle_order_create(request):
                   .values(new_order))
     result = request.app['db_engine'].execute(query)
     order_id = result.inserted_primary_key
-    if not order_id:
+    if order_id is None:
         return web.Response(status=500)
     return web.json_response({'id': order_id[0],
                               'order_number': order_number})
