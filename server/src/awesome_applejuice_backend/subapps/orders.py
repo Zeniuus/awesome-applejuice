@@ -70,8 +70,12 @@ async def handle_order_update(request):
     # TODO: validate inputs.
     order_number = request.match_info['order_number']
     order_update = {key: body[key]
-                    for key in ['sender_name', 'amount', 'receiver_name', 'receiver_phone', 'receiver_addr']
+                    for key in ['order_type', 'sender_name', 'amount',
+                                'receiver_name', 'receiver_phone', 'receiver_addr',
+                                'status', 'paid']
                     if key in body.keys()}
+    # TODO: only admin can update status and paid field.
+    # TODO: implement XXXSerializer.as_row(item).
     query = (order.update()
                   .values(**order_update)
                   .where(order.c.order_number == order_number))

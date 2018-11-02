@@ -5,13 +5,13 @@ from .base import metadata, SimpleSerializer
 
 
 class OrderType(enum.Enum):
-    APPLEJUICE = enum.auto()
+    APPLEJUICE = 'APPLEJUICE'
 
 
 class OrderStatus(enum.Enum):
-    BEFORE_SEND = enum.auto()
-    ON_DELIVERY = enum.auto()
-    DELIVERY_COMPLETE = enum.auto()
+    BEFORE_SEND = 'BEFORE_SEND'
+    ON_DELIVERY = 'ON_DELIVERY'
+    DELIVERY_COMPLETE = 'DELIVERY_COMPLETE'
 
 
 order = sa.Table(
