@@ -28,7 +28,7 @@ def validate_body(body, required_validations):
 
     for key, validations in required_validations.items():
         for validation in validations:
-            if not _validate_input(body[key], validation):
+            if not _validate_input(body.get(key, None), validation):
                 return False
     return True
 
