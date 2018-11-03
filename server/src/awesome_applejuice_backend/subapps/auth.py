@@ -61,6 +61,7 @@ async def handle_signin(request):
     if not row:
         return web.Response(status=401)
     _, user_id, nickname, password = row
+    # TODO: get rid of password field from jwt token.
     jwt_byte = _jwt.encode({'id': user_id,
                             'nickname': nickname,
                             'password': password},
