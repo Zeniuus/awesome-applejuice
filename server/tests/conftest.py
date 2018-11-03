@@ -58,7 +58,7 @@ def create_database(test_user):
                     '3306/tcp': {},
                 },
                 'Env': [
-                    'MYSQL_ROOT_PASSWORD=04220506',
+                    'MYSQL_ROOT_PASSWORD=test-password',
                     'MYSQL_DATABASE=awesome-applejuice-db',
                 ],
                 'Image': 'mysql:latest',
@@ -82,7 +82,7 @@ def create_database(test_user):
     wait_db_ready()
 
     # Perform migration.
-    alembic_migration_cmd = ['upgrade', 'head']
+    alembic_migration_cmd = ['-c', settings.ALEMBIC_INI_PATH, 'upgrade', 'head']
     alembic.config.main(argv=alembic_migration_cmd)
 
     # Insert default values for testing.

@@ -1,0 +1,24 @@
+sudo: required
+
+language: python
+python:
+- "3.6"
+
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: test
+      env:
+        - ENV_FOR_DYNACONF=testing
+      before_script:
+        - cd server
+        - cp ci/alembic-ci.ini ./alembic.ini
+        - cp ci/settings-ci.toml ./settings.toml
+        - pip install -U -q pip setuptools
+        - pip install -r requirements.txt
+        - docker pull mysql:latest
+        - sudo service mysql stop
+      script:
+        - python -m pytest tests --cov=src

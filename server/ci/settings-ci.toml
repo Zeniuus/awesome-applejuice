@@ -1,0 +1,6 @@
+[testing]
+username = "root"
+password = "test-password"
+host = "localhost"
+dbname = "awesome-applejuice-db"
+alembic_ini_path = "alembic.ini"
