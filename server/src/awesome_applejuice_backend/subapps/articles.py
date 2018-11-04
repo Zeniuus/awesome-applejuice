@@ -1,8 +1,8 @@
 from aiohttp import web
+from pyvalidator import validate, field, InvalidInputError
 import sqlalchemy as sa
 
 from awesome_applejuice_backend.models import article, ArticleSerializer
-from awesome_applejuice_backend.utils.http import data_missing, bad_request_missing_data
 
 
 async def handle_articles_fetch(request):
@@ -15,10 +15,15 @@ async def handle_articles_fetch(request):
 
 async def handle_article_create(request):
     body = await request.json()
-    mandatory_keys = ['title', 'board', 'content', 'created_by']
-    if data_missing(mandatory_keys, body):
-        return web.Response(text=bad_request_missing_data(mandatory_keys),
-                            status=400)
+    try:
+        validate(body, {
+            'title': field.String(),
+            'board': field.Integer(nonnegative=True),
+            'content': field.String(),
+            'created_by': field.Integer(nonnegative=True)
+        })
+    except InvalidInputError as e:
+        return web.Response(text=str(e), status=400)
     # TODO: validate inputs.
     new_article = {
         'title': body['title'],

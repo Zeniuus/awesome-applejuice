@@ -18,7 +18,6 @@ def init_root_app(app):
     password = settings.PASSWORD
     host = settings.HOST
     dbname = settings.DBNAME
-    print(username, password, host, dbname)
     app['db_engine'] = sa.create_engine(f'mysql+pymysql://{username}:{password}@{host}/{dbname}')
 
 

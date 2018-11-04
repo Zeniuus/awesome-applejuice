@@ -1,11 +1,11 @@
 from aiohttp import web
 import sqlalchemy as sa
+from pyvalidator import validate, field, InvalidInputError
 import uuid
 
 from awesome_applejuice_backend.models import (
     order, OrderType, OrderSerializer)
-from awesome_applejuice_backend.utils.http import (
-    data_missing, bad_request_missing_data, auth_required, validate_body)
+from awesome_applejuice_backend.utils.http import auth_required
 
 
 @auth_required
@@ -19,18 +19,17 @@ async def handle_orders_fetch(request):
 
 async def handle_order_create(request):
     body = await request.json()
-    mandatory_keys = ['sender_name', 'amount', 'receiver_name', 'receiver_phone', 'receiver_addr']
-    if data_missing(mandatory_keys, body):
-        return web.Response(text=bad_request_missing_data(mandatory_keys),
-                            status=400)
-    is_valid = validate_body(body, {
-        'sender_name': ['not_empty'],
-        'amount': ['not_empty', 'number'],
-        'receiver_name': ['not_empty'],
-        'receiver_phone': ['not_empty', 'number'],
-        'receiver_addr': ['not_empty']
-    })
-    if not is_valid:
+    try:
+        validate(body, {
+            'sender_name': field.String(empty=False),
+            'amount': field.Integer(positive=True),
+            'receiver_name': field.String(empty=False),
+            'receiver_phone': field.Integer(),
+            'receiver_addr': field.String(empty=False),
+        })
+    except InvalidInputError as e:
+        print('fuckfuck')
+        print(e)
         return web.Response(status=400)
     order_number = uuid.uuid4().hex
     new_order = {

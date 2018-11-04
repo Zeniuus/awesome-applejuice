@@ -1,10 +1,10 @@
 from aiohttp import web
 import jwt as _jwt
+from pyvalidator import validate, field, InvalidInputError
 import re
 import sqlalchemy as sa
 
 from awesome_applejuice_backend.models import user
-from awesome_applejuice_backend.utils.http import data_missing, bad_request_missing_data
 
 
 @web.middleware
@@ -30,9 +30,14 @@ def _parse_auth_header(auth_header):
 
 async def handle_signup(request):
     body = await request.json()
-    mandatory_keys = ['id', 'nickname', 'password']
-    if data_missing(mandatory_keys, body):
-        return web.Response(text=bad_request_missing_data(mandatory_keys), status=400)
+    try:
+        validate(body, {
+            'id': field.String(length=30),
+            'nickname': field.String(length=32),
+            'password': field.String(length=32),
+        })
+    except InvalidInputError as e:
+        return web.Response(text=str(e), status=400)
     # TODO: check length of id, nickname, password.
     # TODO: check if duplicate.
     # TODO: encrypt password.
@@ -49,9 +54,13 @@ async def handle_signup(request):
 
 async def handle_signin(request):
     body = await request.json()
-    mandatory_keys = ['id', 'password']
-    if data_missing(mandatory_keys, body):
-        return web.Response(text=bad_request_missing_data(mandatory_keys), status=400)
+    try:
+        validate(body, {
+            'id': field.String(),
+            'password': field.String(),
+        })
+    except InvalidInputError as e:
+        return web.Response(text=str(e), status=400)
     query = (sa.select('*')
                .select_from(user)
                .where((user.c.id == body['id'])
